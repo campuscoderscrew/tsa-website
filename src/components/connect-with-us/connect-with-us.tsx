@@ -24,7 +24,7 @@ const getRadialPoints = (
     // The angle between each point.
     const INTERVAL = (2 * Math.PI) / numPoints;
 
-    // Calculate the Cartesian position of each point.
+    // Calculate the Cartesian position of each point based on the angle.
     const positions = [];
     for (let i = 0; i < numPoints; i++) {
         const ANGLE = phase + INTERVAL * i;
@@ -34,6 +34,11 @@ const getRadialPoints = (
     return positions;
 };
 
+/**
+ * Create the Connect With Us section.
+ * 
+ * @returns A `ReactNode` containing the entire Connect With Us section.
+ */
 const ConnectWithUs = (): ReactNode => {
     /**
      * Stores the images paths of all the SVG logos to be displayed.
@@ -60,6 +65,7 @@ const ConnectWithUs = (): ReactNode => {
         (2 * Math.PI) / 4
     );
 
+    // Animate the logos popping outward from the center.
     useGSAP(() => {
         gsap.fromTo(
             ".logo",
