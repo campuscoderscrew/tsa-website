@@ -61,11 +61,18 @@ const ConnectWithUs = (): ReactNode => {
     );
 
     useGSAP(() => {
-        gsap.to(".logo", {
-            x: 0,
-            duration: 5,
-            ease: "none"
-        });
+        gsap.fromTo(
+            ".logo",
+            { x: 0, y: 0 },
+            {
+                x: (index) => {
+                    return LOGO_POSITIONS[index][0];
+                },
+                y: (index) => {
+                    return LOGO_POSITIONS[index][1];
+                }
+            }
+        );
     });
 
     return (
@@ -82,8 +89,9 @@ const ConnectWithUs = (): ReactNode => {
                     return (
                         <a
                             href={image.link}
-                            key={image.imagePath}
                             className="logo absolute inline"
+                            id={image.imagePath}
+                            key={image.imagePath}
                         >
                             <img
                                 src={`./src/assets/connect-with-us/${image.imagePath}`}
