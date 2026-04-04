@@ -60,21 +60,7 @@ const ConnectWithUs = (): ReactNode => {
         (2 * Math.PI) / 4
     );
 
-    // Use selectors...
-    // useGSAP(() => {
-    //     gsap.to(".logos-container", {
-    //         rotation: "+=0",
-    //         duration: 3,
-    //         ease: "none",
-    //         repeat: -1
-    //     });
-    // });
-
     useGSAP(() => {
-        /*
-         * Make the individual logos Loop counterclockwise at a constant speed
-         * to counteract the overrall rotation.
-         */
         gsap.to(".logo", {
             rotation: -360,
             duration: 5,
@@ -93,14 +79,6 @@ const ConnectWithUs = (): ReactNode => {
                        bg-neutral-800 text-center text-white"
         >
             <div className="logos-container static mt-20 flex flex-col items-center">
-                <svg className="absolute m-auto" >
-                    <circle
-                        r={LOGOS_RADIUS}
-                        cx={window.outerWidth / 5}
-                        cy={window.outerHeight / 5}
-                    />
-                </svg>
-
                 {LOGO_DATA.map((image, index) => {
                     const style = {
                         transform: `translate(${LOGO_POSITIONS[index][0]}px, ${LOGO_POSITIONS[index][1]}px)`
