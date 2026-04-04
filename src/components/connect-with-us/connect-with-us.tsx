@@ -62,10 +62,9 @@ const ConnectWithUs = (): ReactNode => {
 
     useGSAP(() => {
         gsap.to(".logo", {
-            rotation: -360,
+            x: 0,
             duration: 5,
-            ease: "none",
-            repeat: -1
+            ease: "none"
         });
     });
 
@@ -79,17 +78,12 @@ const ConnectWithUs = (): ReactNode => {
                        bg-neutral-800 text-center text-white"
         >
             <div className="logos-container static mt-20 flex flex-col items-center">
-                {LOGO_DATA.map((image, index) => {
-                    const style = {
-                        transform: `translate(${LOGO_POSITIONS[index][0]}px, ${LOGO_POSITIONS[index][1]}px)`
-                    };
-
+                {LOGO_DATA.map((image) => {
                     return (
                         <a
                             href={image.link}
                             key={image.imagePath}
                             className="logo absolute inline"
-                            style={style}
                         >
                             <img
                                 src={`./src/assets/connect-with-us/${image.imagePath}`}
