@@ -11,7 +11,9 @@ gsap.registerPlugin(useGSAP);
  *
  * @param radius    The radius of the circle.
  * @param numPoints The number of points around the circle.
- * @param phase     The angle to start from.
+ * @param phase     The angle to start from. By default 0.
+ * @param translate How much to translate the entire circle by.
+ *                  By default `[0, 0]`.
  * @returns A 2D array of equidistant positions around a circle with `numPoints`
  * number of points and a radius of `radius`. Each inner array is of the format
  * [x, y].
@@ -19,7 +21,8 @@ gsap.registerPlugin(useGSAP);
 const getRadialPoints = (
     radius: number,
     numPoints: number,
-    phase: number = 0
+    phase: number = 0,
+    translate: number[] = [0, 0]
 ): number[][] => {
     // The angle between each point.
     const INTERVAL = (2 * Math.PI) / numPoints;
@@ -28,7 +31,9 @@ const getRadialPoints = (
     const positions = [];
     for (let i = 0; i < numPoints; i++) {
         const ANGLE = phase + INTERVAL * i;
-        positions.push([radius * Math.cos(ANGLE), radius * Math.sin(ANGLE)]);
+        const x = translate[0] + radius * Math.cos(ANGLE);
+        const y = translate[1] + radius * Math.sin(ANGLE);
+        positions.push([x, y]);
     }
 
     return positions;
@@ -36,7 +41,7 @@ const getRadialPoints = (
 
 /**
  * Create the Connect With Us section.
- * 
+ *
  * @returns A `ReactNode` containing the entire Connect With Us section.
  */
 const ConnectWithUs = (): ReactNode => {
@@ -62,7 +67,12 @@ const ConnectWithUs = (): ReactNode => {
     const LOGO_POSITIONS = getRadialPoints(
         LOGOS_RADIUS,
         LOGO_DATA.length,
-        (2 * Math.PI) / 4
+        (2 * Math.PI) / 4,
+        /*
+         * We need a transform of the center because the positions of images are
+         * measured from their tops, not their centers, which causes it to be off-center.
+         */
+        [0, -32]
     );
 
     // Animate the logos popping outward from the center.
@@ -76,8 +86,10 @@ const ConnectWithUs = (): ReactNode => {
                 },
                 y: (index) => {
                     return LOGO_POSITIONS[index][1];
-                }
-            },
+                },
+                duration: 1.5,
+                ease: "back.out(0.75)"
+            }
         );
     });
 
