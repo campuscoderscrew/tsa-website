@@ -8,6 +8,7 @@ import Test from "./components/test/test";
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
+        <Test />
         <ConnectWithUs />
         <Test />
     </StrictMode>

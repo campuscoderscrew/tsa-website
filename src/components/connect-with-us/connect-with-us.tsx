@@ -77,7 +77,7 @@ const ConnectWithUs = (): ReactNode => {
                 y: (index) => {
                     return LOGO_POSITIONS[index][1];
                 }
-            }
+            },
         );
     });
 
@@ -90,7 +90,7 @@ const ConnectWithUs = (): ReactNode => {
                        rounded-2xl
                        bg-neutral-800 text-center text-white"
         >
-            <div className="logos-container static mt-20 flex flex-col items-center">
+            <div className="logos-container static flex flex-col items-center">
                 {LOGO_DATA.map((image) => {
                     return (
                         <a
@@ -108,7 +108,7 @@ const ConnectWithUs = (): ReactNode => {
             </div>
 
             <div
-                className="static space-y-6 
+                className="absolute space-y-6 
                            text-center font-family-[Manrope] text-white"
             >
                 <button
