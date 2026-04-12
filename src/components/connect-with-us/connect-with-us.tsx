@@ -61,7 +61,7 @@ const ConnectWithUs = (): ReactNode => {
     ];
 
     // Radius of the logos around the center.
-    const LOGOS_RADIUS = 315;
+    const LOGOS_RADIUS = Math.min(innerWidth, innerHeight) / 2.5;
 
     // Calculate Cartesian coordinates for the logos.
     const LOGO_POSITIONS = getRadialPoints(
@@ -97,7 +97,8 @@ const ConnectWithUs = (): ReactNode => {
         <section
             id="connect-with-us"
             className="relative
-                       w-screen h-screen
+                       w-46/50 h-screen
+                       place-self-center
                        flex flex-col justify-center items-center
                        rounded-2xl
                        bg-neutral-800 text-center text-white"
