@@ -40,6 +40,46 @@ const getRadialPoints = (
 };
 
 /**
+ * Create a 2D array of x, y values, arranging them into two rows seperated by
+ * distance `distance` and each of width `width`.
+ * @param distance  The distance between the two rows.
+ * @param width     The total width of the rows.
+ * @param numPoints The number of points in each row.
+ * @param translate A translation for every point.
+ * @returns A 2D array of x, y values, with one row above and one row below.
+ */
+const getLinearPoints = (
+    distance: number,
+    width: number,
+    numPoints: number,
+    translate: number[] = [0, 0]
+): number[][] => {
+    const positions = [];
+
+    /*
+     * If the number of points we are working with is odd,
+     * assume a dummy at the end to make thing even.
+     */
+    numPoints = numPoints % 2 == 1 ? numPoints + 1 : numPoints;
+
+    // Interval between points.
+    const interval = width / (numPoints / 2);
+
+    // Splits the elements into two rows, one above and one below.
+    for (let y = -distance / 2; y <= distance / 2; y += distance) {
+        /*
+         * The -1 prevents cases where the last element is perfectly on the
+         * threshold for the first row.
+         */
+        for (let x = -width / 2; x < width / 2 - 1; x += interval) {
+            positions.push([x + translate[0], y + translate[1]]);
+        }
+    }
+
+    return positions;
+};
+
+/**
  * Create the Connect With Us section.
  *
  * @returns A `ReactNode` containing the entire Connect With Us section.
@@ -63,17 +103,30 @@ const ConnectWithUs = (): ReactNode => {
     // Radius of the logos around the center.
     const LOGOS_RADIUS = Math.min(innerWidth, innerHeight) / 2.5;
 
-    // Calculate Cartesian coordinates for the logos.
-    const LOGO_POSITIONS = getRadialPoints(
-        LOGOS_RADIUS,
-        LOGO_DATA.length,
-        (2 * Math.PI) / 4,
-        /*
-         * We need a transform of the center because the positions of images are
-         * measured from their tops, not their centers, which causes it to be off-center.
-         */
-        [0, -32]
-    );
+    /*
+     * We need a transform of the center because the positions of images are
+     * measured from their tops, not their centers, which causes it to be off-center.
+     */
+    const translate = [0, -32];
+    /*
+     * If the screen is less than medium, show the logos in two rows rather than
+     * a circle.
+     */
+    const LOGO_POSITIONS =
+        innerWidth >= 768
+            ? // Calculate Cartesian coordinates for the logos.
+              getRadialPoints(
+                  LOGOS_RADIUS,
+                  LOGO_DATA.length,
+                  (2 * Math.PI) / 4,
+                  translate
+              )
+            : getLinearPoints(
+                  LOGOS_RADIUS * 3,
+                  LOGOS_RADIUS * 1.8,
+                  LOGO_DATA.length,
+                  [48, -32]
+              );
 
     // Animate the logos popping outward from the center.
     useGSAP(() => {
@@ -97,7 +150,7 @@ const ConnectWithUs = (): ReactNode => {
         <section
             id="connect-with-us"
             className="relative
-                       w-46/50 h-screen
+                       w-49/50 h-screen
                        place-self-center
                        flex flex-col justify-center items-center
                        rounded-2xl
@@ -131,7 +184,9 @@ const ConnectWithUs = (): ReactNode => {
                     Members
                 </button>
 
-                <h2 className="text-5xl font-semibold">Connect With Us</h2>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold">
+                    Connect With Us
+                </h2>
                 <h4>The students behind our Mission</h4>
             </div>
         </section>
