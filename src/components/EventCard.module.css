@@ -14,8 +14,7 @@
   border-radius: 16px;
   overflow: hidden;
   height: 380px;
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 260px;
   opacity: 0;
   cursor: pointer;
   transition: transform 0.35s ease, box-shadow 0.35s ease;
