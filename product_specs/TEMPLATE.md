@@ -13,6 +13,14 @@
 | **Blocks** | <spec IDs that can't start until this lands, or —> |
 | **Branch** | `w__-__-<slug>` |
 
+### Difficulty
+
+| Front End | Back End | DevOps |
+| :-: | :-: | :-: |
+| **_** | **_** | **_** |
+
+Scored 1–4 — see the proficiency scale in the week folder's `README.md`.
+
 ---
 
 ## Objective
