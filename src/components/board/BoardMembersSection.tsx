@@ -3,6 +3,7 @@ import gsap from "gsap";
 import ImageReveal from "@/components/ui/image-tiles";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight } from "lucide-react";
+import { LaiThaiDivider, PrangSilhouette, ThaiCorner } from "@/components/ui/thai-ornament";
 import { useGalleryTransition } from "@/components/transitions/GalleryTransitionProvider";
 
 const base = import.meta.env.BASE_URL;
@@ -170,7 +171,7 @@ export default function BoardMembersSection() {
       aria-label="Our board members"
       className="relative w-full overflow-hidden bg-background py-16 sm:py-20 md:flex md:min-h-[115vh] md:items-center"
     >
-      {/* blurred blobs */}
+      {/* red blob for warmth (left); the right edge belongs to the prang watermark */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <svg
           className="absolute -left-52 top-8 h-[clamp(360px,62vw,680px)] w-[clamp(360px,62vw,680px)] opacity-30 blur-[50px] sm:-left-60 sm:top-10 sm:opacity-35 md:-left-72 md:top-12"
@@ -182,30 +183,33 @@ export default function BoardMembersSection() {
             fill="#ED1C24"
           />
         </svg>
-        <svg
-          className="absolute -right-56 top-40 h-[clamp(380px,66vw,720px)] w-[clamp(380px,66vw,720px)] opacity-25 blur-[50px] sm:-right-64 sm:top-44 sm:opacity-30 md:-right-72 md:top-52"
-          viewBox="0 0 600 600"
-          fill="none"
-        >
-          <path
-            d="M504 238c32 93-8 216-96 287-87 71-222 90-313 34-91-55-138-184-91-281 47-97 188-162 309-139 121 23 159 6 191 99Z"
-            fill="#241D4F"
-          />
-        </svg>
-      </div>
+        {/* Sits beside the short last row of the grid, clear of all copy. */}
+        <PrangSilhouette className="absolute right-0 top-[34%] hidden h-[760px] w-[380px] translate-x-[35%] text-[#241D4F] opacity-[0.05] [mask-image:linear-gradient(to_bottom,black_65%,transparent)] lg:block" />      </div>
 
       <div className="relative mx-auto flex w-full max-w-6xl flex-col px-6 md:px-10">
         <div className="inline-flex w-fit shrink-0 items-center self-start rounded-full border border-zinc-300 bg-background px-2.5 py-0.5 text-xs font-semibold leading-none tracking-wide text-zinc-700">
           Board
         </div>
+        <LaiThaiDivider height={18} className="mt-3 block w-full max-w-sm text-[#9B1B30] sm:max-w-lg" />
 
-        <div className="mt-4 flex flex-col items-start gap-10 md:flex-row md:items-end md:justify-between">
-          <h2
-            className="max-w-xl text-pretty text-5xl leading-[0.92] tracking-[-0.06em] text-zinc-900 sm:text-6xl md:text-7xl"
-            style={{ textTransform: "lowercase" }}
-          >
-            our board members
-          </h2>
+        <div className="mt-3 flex flex-col items-start gap-10 md:flex-row md:items-end md:justify-between">
+          <div className="relative shrink-0">
+            <ThaiCorner
+              corner="top-left"
+              className="pointer-events-none absolute -left-3 top-0 h-6 w-6 text-[#9B1B30] sm:-left-4 sm:h-8 sm:w-8 md:-left-5 md:h-10 md:w-10"
+            />
+            {/* max-w in em so the box hugs "our board / members" and the corners hug the text */}
+            <h2
+              className="max-w-[4.15em] text-pretty text-5xl leading-[0.92] tracking-[-0.06em] text-zinc-900 sm:text-6xl md:text-7xl"
+              style={{ textTransform: "lowercase" }}
+            >
+              our board members
+            </h2>
+            <ThaiCorner
+              corner="bottom-right"
+              className="pointer-events-none absolute -bottom-2 -right-3 h-6 w-6 text-[#9B1B30] sm:-right-4 sm:h-8 sm:w-8 md:-bottom-3 md:-right-5 md:h-10 md:w-10"
+            />
+          </div>
 
           <p className="max-w-md text-pretty text-sm font-semibold leading-6 text-zinc-600 sm:text-base sm:leading-7">
             A scattered “work-style” grid with inertia scroll. We’ll swap these
