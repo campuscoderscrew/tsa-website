@@ -22,7 +22,7 @@ export default function GalleryPage() {
   return (
     <main className="relative w-full">
       <header className="pointer-events-none fixed inset-x-0 top-0 z-50 w-full">
-        <div className="pointer-events-auto w-full bg-[#141414]/70 pt-[env(safe-area-inset-top)] backdrop-blur-md">
+        <div className="pointer-events-auto w-full bg-tsa-navy-900/70 pt-[env(safe-area-inset-top)] backdrop-blur-md">
           <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-3 py-3 sm:px-6 sm:py-4">
           <Button
             size="sm"
@@ -47,7 +47,7 @@ export default function GalleryPage() {
         </div>
       </header>
 
-      <section className="min-h-dvh w-full bg-[#141414] px-3 pb-[calc(2.5rem+env(safe-area-inset-bottom))] pt-[calc(5rem+env(safe-area-inset-top))] sm:px-6 sm:pt-[calc(6rem+env(safe-area-inset-top))]">
+      <section className="min-h-dvh w-full bg-tsa-navy-900 px-3 pb-[calc(2.5rem+env(safe-area-inset-bottom))] pt-[calc(5rem+env(safe-area-inset-top))] sm:px-6 sm:pt-[calc(6rem+env(safe-area-inset-top))]">
         <div className="mx-auto w-full max-w-7xl">
           <div className="columns-1 gap-3 space-y-3 sm:columns-2 sm:gap-5 sm:space-y-5 lg:columns-3">
             {IMAGES.map((src) => (
