@@ -212,7 +212,7 @@ export default function UpcomingEvents() {
 
   return (
     <section id="events" aria-label="Upcoming events" className="w-full">
-      <div className="relative w-full overflow-hidden rounded-[26px] bg-[#241D4F] ring-1 ring-black/10">
+      <div className="relative w-full overflow-hidden rounded-[26px] bg-tsa-navy-700 ring-1 ring-black/10">
         <div className="relative mx-auto flex min-h-[100svh] w-full max-w-6xl flex-col items-center px-6 py-14 sm:px-10 sm:py-16">
           <header className="w-full text-center">
             <div className="inline-flex items-center rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs font-semibold tracking-wide text-white/80">
