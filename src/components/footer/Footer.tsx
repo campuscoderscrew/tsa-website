@@ -146,7 +146,7 @@ export default function Footer() {
 
               <div className="mt-6 flex justify-end md:justify-start">
                 <img
-                  src={`${import.meta.env.BASE_URL}logo.jpg`}
+                  src={`${import.meta.env.BASE_URL}logo.png`}
                   alt="Thai Student Association logo"
                   className="h-14 w-auto select-none object-contain sm:h-16 md:h-[4.5rem]"
                   draggable={false}
