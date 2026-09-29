@@ -9,8 +9,8 @@
 @custom-variant not-dark (&:not(.dark, .dark *));
 
 @theme inline {
-  --font-manrope: "Manrope", ui-sans-serif, system-ui, sans-serif;
-  --font-epilogue: "Epilogue", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", ui-serif, system-ui, serif;
+  --font-body: "Manrope", ui-sans-serif, system-ui, sans-serif;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -190,7 +190,7 @@
   }
 
   body {
-    @apply m-0 min-h-dvh bg-background font-manrope text-foreground antialiased;
+    @apply m-0 min-h-dvh bg-background font-body text-foreground antialiased;
     overflow-x: hidden;
     overflow-y: auto;
   }
@@ -198,8 +198,8 @@
   h1,
   h2,
   h3 {
-    font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
-    font-weight: 600;
+    font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 400;
   }
 
   #root {
