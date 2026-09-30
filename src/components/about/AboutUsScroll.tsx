@@ -128,7 +128,7 @@ export default function AboutUsScroll() {
   return (
     <section
       ref={rootRef}
-      className="relative w-full bg-background font-manrope"
+      className="relative w-full bg-background font-body"
       aria-label="Our Services"
     >
       <div className="mx-auto w-full max-w-6xl px-6 py-16 md:px-10">
@@ -149,11 +149,11 @@ export default function AboutUsScroll() {
           {cards.map((c, index) => {
             const bg =
               c.theme === "red"
-                ? "bg-[#9B1B30]"
+                ? "bg-tsa-red-600"
                 : c.theme === "navy"
-                  ? "bg-[#241D4F]"
-                  : "bg-[#FFFFF0]";
-            const fg = c.theme === "cream" ? "text-zinc-900" : "text-[#FFFFF0]";
+                  ? "bg-tsa-navy-700"
+                  : "bg-tsa-cream-100";
+            const fg = c.theme === "cream" ? "text-zinc-900" : "text-tsa-cream-100";
             const border = c.theme === "cream" ? "border-black/10" : "border-white/15";
 
             return (

@@ -212,13 +212,13 @@ export default function UpcomingEvents() {
 
   return (
     <section id="events" aria-label="Upcoming events" className="w-full">
-      <div className="relative w-full overflow-hidden rounded-[26px] bg-[#241D4F] ring-1 ring-black/10">
+      <div className="relative w-full overflow-hidden rounded-[26px] bg-tsa-navy-700 ring-1 ring-black/10">
         <div className="relative mx-auto flex min-h-[100svh] w-full max-w-6xl flex-col items-center px-6 py-14 sm:px-10 sm:py-16">
           <header className="w-full text-center">
             <div className="inline-flex items-center rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs font-semibold tracking-wide text-white/80">
               Events
             </div>
-            <h2 className="mt-4 font-manrope text-4xl font-extrabold uppercase tracking-tighter text-white sm:text-5xl">
+            <h2 className="mt-4 font-display text-4xl font-extrabold uppercase tracking-tighter text-white sm:text-5xl">
               Upcoming Events
             </h2>
           </header>
@@ -348,7 +348,7 @@ export default function UpcomingEvents() {
                   opacity: 0,
                 }}
                 transition={{ type: "spring", stiffness: 420, damping: 22, mass: 0.8 }}
-                className="font-manrope text-3xl font-extrabold uppercase tracking-tighter text-white sm:text-4xl"
+                className="font-body text-3xl font-extrabold uppercase tracking-tighter text-white sm:text-4xl"
               >
                 {items[activeIndex].title}
               </motion.h3>

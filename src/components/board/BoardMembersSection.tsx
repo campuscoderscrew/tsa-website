@@ -9,19 +9,19 @@ const base = import.meta.env.BASE_URL;
 
 const CARDS = [
   { src: `${base}Alison.jpg`, rotate: "-8deg", tag: "alison", tagColor: "#A51931" },
-  { src: `${base}Ei.jpg`, rotate: "4deg", tag: "ei", tagColor: "#F4F5F8" },
+  { src: `${base}Ei.jpg`, rotate: "4deg", tag: "ei", tagColor: "#FFFFF0" },
   { src: `${base}Linh.jpg`, rotate: "-3deg", tag: "linh", tagColor: "#2D2A4A" },
   { src: `${base}Ismail.jpg`, rotate: "6deg", tag: "ismail", tagColor: "#A51931" },
-  { src: `${base}Eric.jpg`, rotate: "-6deg", tag: "eric", tagColor: "#F4F5F8" },
+  { src: `${base}Eric.jpg`, rotate: "-6deg", tag: "eric", tagColor: "#FFFFF0" },
   { src: `${base}Christina.jpg`, rotate: "2deg", tag: "christina", tagColor: "#2D2A4A" },
   { src: `${base}Crystal.jpg`, rotate: "-2deg", tag: "crystal", tagColor: "#A51931" },
-  { src: `${base}Gokul.jpg`, rotate: "5deg", tag: "gokul", tagColor: "#F4F5F8" },
+  { src: `${base}Gokul.jpg`, rotate: "5deg", tag: "gokul", tagColor: "#FFFFF0" },
   { src: `${base}Dara.jpg`, rotate: "-5deg", tag: "dara", tagColor: "#2D2A4A" },
   { src: `${base}Xander.jpg`, rotate: "3deg", tag: "xander", tagColor: "#A51931" },
-  { src: `${base}Vincent.jpg`, rotate: "-7deg", tag: "vincent", tagColor: "#F4F5F8" },
+  { src: `${base}Vincent.jpg`, rotate: "-7deg", tag: "vincent", tagColor: "#FFFFF0" },
   { src: `${base}Ije.jpg`, rotate: "7deg", tag: "ije", tagColor: "#2D2A4A" },
   { src: `${base}Pat.jpg`, rotate: "-4deg", tag: "pat", tagColor: "#A51931" },
-  { src: `${base}Im.jpg`, rotate: "1deg", tag: "im", tagColor: "#F4F5F8" },
+  { src: `${base}Im.jpg`, rotate: "1deg", tag: "im", tagColor: "#FFFFF0" },
 ];
 
 const GALLERY_IMAGES = {
@@ -179,7 +179,7 @@ export default function BoardMembersSection() {
         >
           <path
             d="M458 126c68 59 106 155 89 242-18 87-92 164-180 186-88 23-189-8-241-79-53-71-58-182-7-261 51-80 176-147 339-88Z"
-            fill="#ED1C24"
+            fill="#A51931"
           />
         </svg>
         <svg
@@ -262,10 +262,10 @@ export default function BoardMembersSection() {
                   />
                 }
               >
-                <span className="rounded-full bg-white px-4 py-1.5 font-bold text-[#9B1B30] duration-500 ease-in-out group-hover:bg-[#7A1028] group-hover:text-[#FFFFF0] group-hover:transition-colors">
+                <span className="rounded-full bg-white px-4 py-1.5 font-bold text-tsa-red-600 duration-500 ease-in-out group-hover:bg-tsa-red-700 group-hover:text-tsa-cream-100 group-hover:transition-colors">
                   View gallery
                 </span>
-                <div className="relative flex h-fit cursor-pointer items-center overflow-hidden rounded-full bg-white p-2.5 font-bold text-[#9B1B30] duration-500 ease-in-out group-hover:bg-[#7A1028] group-hover:text-[#FFFFF0] group-hover:transition-colors">
+                <div className="relative flex h-fit cursor-pointer items-center overflow-hidden rounded-full bg-white p-2.5 font-bold text-tsa-red-700 duration-500 ease-in-out group-hover:bg-tsa-red-600 group-hover:text-tsa-cream-100 group-hover:transition-colors">
                   <ArrowUpRight className="absolute h-4 w-4 -translate-x-1/2 transition-all duration-500 ease-in-out group-hover:translate-x-10" />
                   <ArrowUpRight className="absolute h-4 w-4 -translate-x-10 transition-all duration-500 ease-in-out group-hover:-translate-x-1/2" />
                 </div>
