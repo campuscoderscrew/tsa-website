@@ -79,10 +79,10 @@ real tokens instead of hex.
 | Spec | Title | Track | Status | Assigned | FE | BE | DevOps | Depends on |
 | --- | --- | :-: | --- | --- | :-: | :-: | :-: | --- |
 | [W38.1.1](./W38.1.1.md) | Define the TSA color token set | A | Completed (#6) | Luis C. | 3 | 1 | 1 | — |
-| [W38.1.2](./W38.1.2.md) | Migrate hardcoded hex colors to tokens | A | In Review — merge in W41.0 | Luis C. | 2 | 1 | 2 | W38.1.1 |
-| [W38.1.3](./W38.1.3.md) | Add a display typeface and type scale | A | In Review — merge in W41.0 | Luis C. | 3 | 1 | 1 | W38.1.1 |
+| [W38.1.2](./W38.1.2.md) | Migrate hardcoded hex colors to tokens | A | Completed (#9) | Luis C. | 2 | 1 | 2 | W38.1.1 |
+| [W38.1.3](./W38.1.3.md) | Add a display typeface and type scale | A | Completed (#10) | Luis C. | 3 | 1 | 1 | W38.1.1 |
 | [W38.2.1](./W38.2.1.md) | Build the Thai ornament component kit | B | Completed (#4) | hambalon | 3 | 1 | 1 | — (soft: W38.1.1) |
-| [W38.2.2](./W38.2.2.md) | Apply ornaments to section headers | B | In Review — merge in W41.0 | hambalon | 3 | 1 | 1 | W38.2.1 |
+| [W38.2.2](./W38.2.2.md) | Apply ornaments to section headers | B | PR #7 merged into the wrong branch — re-PR to `main` in W41.0 | hambalon | 3 | 1 | 1 | W38.2.1 |
 | [W38.3.1](./W38.3.1.md) | Create the board member data model | C | Carried to W41 | — | 2 | 2 | 2 | — |
 | [W38.3.2](./W38.3.2.md) | Redesign the board card with name and role | C | Carried to W41 | — | 3 | 1 | 1 | W38.3.1 |
 | [W38.3.3](./W38.3.3.md) | Add the board member detail overlay | C | Carried to W41 | — | 4 | 1 | 1 | W38.3.2 |

@@ -9,30 +9,32 @@
 
 ## Read this first — where W38 left us
 
-W38 planned 12 specs across six tracks. **4 merged, 3 are sitting in unmerged
-branches, 5 were never started.** Every spec file on `main` still says `TODO`,
-so the board was out of date all week. The table below is what the code shows,
-checked against each spec's acceptance criteria on 2026-10-05.
+W38 planned 12 specs across six tracks. **6 are merged to `main`, 1 was merged
+into the wrong branch, and 5 were never started.** Most spec files never had
+their Status updated, so the board was out of date all week. The table below
+is what the code shows, checked against each spec's acceptance criteria.
+It was last re-checked on 2026-10-05 at 17:20, after PRs #9 and #10 merged.
 
 | Spec | Title | Where it is | Verdict |
 | --- | --- | --- | --- |
 | W38.1.1 | Color token set | Merged (#6) | **Done.** All 11 `--tsa-*` tokens, 6 surfaces, `@theme` registration, palette docs. |
-| W38.1.2 | Hex → tokens | Branch `w38-1-2-hex-to-tokens`, not merged | **Mostly done.** `App.css` deleted, `TSA_COLORS` module added, template purple gone. Still left: all 14 board `tagColor` hexes, the hex string comparison that picks the name-tag text color, both board blob fills, the Events SVG fill, the gallery transition stroke, and the gallery Home button. |
-| W38.1.3 | Display typeface | Branch `w38-1-3-display-type`, not merged | **Mostly done.** Picked Fraunces; `--font-display` / `--font-body` exist; Epilogue no longer loaded. Still left: a dead `font-epilogue` class in Events; the heading fallback stack is sans, not serif; only 400/700 are loaded, but headings ask for 600 and 800; the `-0.06em` / `tracking-tighter` tracking was never retuned for a serif. |
+| W38.1.2 | Hex → tokens | Merged (#9) | **Mostly done.** `App.css` deleted, `TSA_COLORS` module added, template purple gone. Still left: all 14 board `tagColor` hexes, the hex string comparison that picks the name-tag text color, both board blob fills, the Events SVG fill, the gallery transition stroke, and the gallery Home button. |
+| W38.1.3 | Display typeface | Merged (#10) | **Mostly done.** Picked Fraunces; `--font-display` / `--font-body` exist; Epilogue no longer loaded. Still left: a dead `font-epilogue` class in Events; the heading fallback stack is sans, not serif; only 400/700 are loaded, but headings ask for 600 and 800; the `-0.06em` / `tracking-tighter` tracking was never retuned for a serif. |
 | W38.2.1 | Thai ornament kit | Merged (#4) | **Done.** Three components, `currentColor` only, `aria-hidden`, no hex. |
-| W38.2.2 | Apply ornaments | Branch `w38-2-2-apply-ornaments`, not merged | **Done, but stale.** Written before tokens existed, so all five ornament colors are raw hex (`text-[#9B1B30]`). **It conflicts with W38.1.3** in `UpcomingEvents.tsx`. The board heading's `max-w-[4.15em]` was tuned for Manrope and will need a recheck in Fraunces. |
+| W38.2.2 | Apply ornaments | **PR #7 merged into the wrong branch.** It went into `w38-2-1-thai-ornaments`, not `main`. | **Done, but not on `main`, and stale.** Written before tokens existed, so all five ornament colors are raw hex (`text-[#9B1B30]`). **It conflicts with W38.1.3** in `UpcomingEvents.tsx`. The board heading's `max-w-[4.15em]` was tuned for Manrope and will need a recheck in Fraunces. |
 | W38.3.1–3.3 | Board showcase | — | **Not started.** TSA's #1 request. Carried to W41. |
 | W38.4.1 | Gallery retheme | Merged (#3) | **Done.** Navy surface, real `<h1>`. Uses raw hex because it landed before tokens. |
 | W38.4.2 | Gallery captions / alt | — | **Not started.** Every gallery image is still `alt=""`. Carried to W41. |
 | W38.5 | Logo, favicons, OG | Merged (#8) | **Partly done.** Transparent logo and OG tags shipped. But the favicon `<link>` points at `/favicon.png`, **which does not exist** (the files are `favicon.svg` and `favicon-32.png`). `apple-touch-icon.png` is never linked. Root `thai.jpg` was not deleted. `logo.png` is 428 KB at 1000×1000 but is displayed at ≤72px. |
 | W38.6 | Real contact details | — | **Not started.** The footer still says `hello@tsa.club` and links to platform homepages. Carried to W41. |
 
-### Two problems bigger than any one spec
+### Problems bigger than any one spec
 
 1. **The site has never deployed.** The repo README describes
-   `.github/workflows/deploy.yml`, but that file was never committed, so the
-   live URL has been a GitHub Pages 404. **Fixed 2026-10-05:** the workflow is
-   now in the repo. It builds on every push to `main`.
+   `.github/workflows/deploy.yml`, but that file was never committed to
+   `main`, so the live URL has been a GitHub Pages 404. The workflow is now
+   committed **on the `brennen` branch** (commit `aee06be`). The site goes live
+   when that branch merges to `main` (W41.0 step 1).
 2. **`npm run lint` fails on `main` (8 errors).** Every W38 spec's Definition of
    Done says lint must pass, so no W38 PR could have honestly ticked that box.
    - 7 of the errors are a real bug: `useTransform` is called inside a `.map()`
@@ -41,6 +43,14 @@ checked against each spec's acceptance criteria on 2026-10-05.
 
    W41.3.1 and W41.2.3 fix them. **Until those land, the rule is "no *new*
    lint errors."** Run `npx eslint <your files>` rather than trusting the total.
+3. **Merging #9 broke the menu logo.** W38.1.2 branched before W38.5 renamed
+   the logo to `logo.png`. When `main` was merged into it, the conflict in
+   `HomePage.tsx` was resolved toward the old name. `main` now passes
+   `` logoUrl={`${base}logo.jpg`} `` to the slide-out menu, and
+   **`public/logo.jpg` no longer exists**, so the menu shows a broken image.
+   `StaggeredMenu.tsx`'s default `logoUrl` points at `logo.jpg` too. The build
+   and lint can't catch this. W41.0 step 3 hotfixes it, and W41.2.2 adds a
+   check so it can't recur silently.
 
 ### What to change in how we work
 
@@ -48,6 +58,11 @@ checked against each spec's acceptance criteria on 2026-10-05.
   had to be reconstructed from git.
 - **Open the PR the day the work is done.** Three finished branches sat
   unmerged for over a week and drifted into conflicts.
+- **Check the PR's base branch before merging.** GitHub defaults it to
+  whatever the author picked. W38.2.2's PR targeted another feature branch, so
+  "merged" meant nothing reached `main`.
+- **When you resolve a merge conflict, re-read what `main` changed** in that
+  hunk. The logo regression came from keeping the stale side of a conflict.
 - **Use the tokens.** W38.2.2 and W38.4.1 hand-typed hex because they started
   before W38.1.1 merged. That was expected under the soft dependency. Starting
   W41, tokens exist on `main`, so a raw brand hex in a PR is a review blocker.
@@ -56,23 +71,39 @@ checked against each spec's acceptance criteria on 2026-10-05.
 
 ## Prerequisite — lead work before Monday's standup (W41.0)
 
-The W41 specs are written against `main` **after** the three open W38 branches
-land. Brennen does this, in this order:
+The W41 specs are written against `main` with **all** W38 work merged and the
+menu logo fixed. As of 2026-10-05 17:20, the colors (#9) and font (#10) merges
+are done. These steps are left, in this order:
 
-1. Commit `.github/workflows/deploy.yml` and push to `main`. Confirm the
-   Actions run is green and the site loads at
-   <https://campuscoderscrew.github.io/tsa-website/>.
-2. Merge `w38-1-2-hex-to-tokens` (it already has `main` merged in).
-3. Merge `w38-1-3-display-type` (no conflicts after step 2).
-4. Merge `w38-2-2-apply-ornaments`. There is **one conflict**, in
-   `UpcomingEvents.tsx` around line 220. Keep **both** changes: the
-   `LaiThaiDivider` line from W38.2.2, then the `<h2>` with `font-display`
-   from W38.1.3. (Verified: that resolution builds clean.)
-5. Set W38.1.1, 1.2, 1.3, 2.1, 2.2, 4.1 and 5 to `Completed` in their spec files.
-   The leftovers listed above are now tracked in W41 specs.
+- [x] ~~Merge `w38-1-2-hex-to-tokens`~~ — done, PR #9
+- [x] ~~Merge `w38-1-3-display-type`~~ — done, PR #10
 
-Everything left over from those merges is assigned below. Nobody needs to
-re-open a W38 PR.
+1. **Get `brennen` into `main`.** It carries `.github/workflows/deploy.yml` and
+   these W41 specs (commit `aee06be`). Open a PR `brennen → main` and merge it.
+   Then check that the Actions tab shows a green "Deploy to GitHub Pages" run and
+   that <https://campuscoderscrew.github.io/tsa-website/> loads.
+2. **Land W38.2.2 on `main` for real.** PR #7 targeted
+   `w38-2-1-thai-ornaments` instead of `main`. Open a new PR from
+   `w38-2-2-apply-ornaments` (or `w38-2-1-thai-ornaments`, which now contains
+   it) **into `main`**. There is **one conflict**, in `UpcomingEvents.tsx`
+   around line 220. Keep **both** sides: the `LaiThaiDivider` line from W38.2.2,
+   then the `<h2>` with `font-display` from W38.1.3. (Re-verified against
+   today's `main`: no other conflicts, and the resolution builds.)
+3. **Hotfix the menu logo.** It's a two-line change: `logo.jpg` → `logo.png`
+   in `HomePage.tsx` (the `logoUrl` prop) and in `StaggeredMenu.tsx` (the
+   default `logoUrl`). Check the slide-out menu on the live site after it
+   deploys.
+4. **Update statuses.** Set W38.1.1, 1.2 and 1.3 to `Completed` (they say
+   `IN REVIEW`), and W38.2.2 to `Completed` once step 2 merges. W38.2.1, 4.1
+   and 5 are already `Completed`.
+
+**If step 2 can't happen before Monday,** Tracks A, B and C will find no
+ornaments in their files. The ornament-color items in W38.3.2's addendum,
+W41.2.1 and W41.3.1 then don't apply. Tell those developers to skip them
+rather than wait.
+
+Everything left over from the merges is assigned below. Nobody needs to
+re-open a merged W38 PR.
 
 ---
 
@@ -154,7 +185,7 @@ W41.2.3 (CI lint gate) cannot be merged until W41.3.1 is on `main`.
 | [W38.4.2](../W38/W38.4.2.md) | Gallery captions, alt text, and grouping *(carried)* | D | TODO | TBD | 3 | 2 | 1 | W41.0 |
 | [W41.4.1](./W41.4.1.md) | Gallery lightbox | D | TODO | TBD | 4 | 1 | 1 | W38.4.2 |
 
-**Total:** 12 specs ≈ 12 developer-hours, 3 per developer.
+**Total:** 12 specs ≈ 12.5 developer-hours. Three per developer, except Track B at 3.5 (W41.2.2 grew by the asset check).
 
 ---
 

@@ -72,8 +72,8 @@ addendum** — read it first.
 
 ## Week 38 — closed
 
-W38 ended with 4 of 12 specs merged, 3 in unmerged branches (landed by the lead
-in W41.0) and 5 carried into W41. Assessment in [`W41/README.md`](./W41/README.md).
+W38 ended with 6 of 12 specs merged to `main`, 1 (W38.2.2) merged into the
+wrong branch (re-PR to `main` in W41.0), and 5 carried into W41. Assessment in [`W41/README.md`](./W41/README.md).
 
 ### Week 38 plan (as written)
 
