@@ -6,7 +6,7 @@ chain (`W38.1.1 → W38.1.2 → W38.1.3`) so nobody is holding a four-hour task.
 
 ## How this works
 
-- Specs are grouped by week. `W38` = week 38.
+- Specs are grouped by week. `W41` = ISO week 41 (week of 2026-10-05).
 - A spec tells you **what** to build and **why**. It does not give you the code.
   Figuring out the implementation is the point — that's the part you're here to
   learn. Hints are included where a spec touches something non-obvious.
@@ -24,7 +24,7 @@ chain (`W38.1.1 → W38.1.2 → W38.1.3`) so nobody is holding a four-hour task.
    **Assigned Developers**. Commit that change on its own so the board stays
    accurate.
 4. Branch off `main` using the branch name in the spec.
-5. Open a PR titled `W38.x.y — <short description>`. Link the spec file in the
+5. Open a PR titled `W41.x.y — <short description>` (carried specs keep their W38 ID). Link the spec file in the
    description.
 6. When the PR is merged, set **Status** to `Completed`.
 
@@ -44,17 +44,40 @@ Specs are grouped into **tracks**, and tracks are deliberately assigned to
 different files. Stay inside the files listed in your spec's **Files You'll
 Touch** and merge conflicts mostly disappear.
 
-The one file several tracks read is `src/index.css`. Track A owns it. If you
-need a new token, **ask Track A to add it** rather than adding it yourself — two
-people adding tokens to the same block is the most likely conflict this week.
+The one file every track reads is `src/index.css`. Each week's README names
+the track that owns it (W38: Track A; W41: Track B). If you need a new token,
+**ask the owning track to add it** rather than adding it yourself — two people
+adding tokens to the same block is the most likely conflict in any week.
 
 Pull `main` before you start and again before you open your PR.
 
 ---
 
-## Week 38
+## Week 41 — current
 
-Three features are in flight. Roughly 12 hours of work across 6 developers.
+Four developers, four features, ~3 hours each. Full plan, W38 assessment,
+dependency graph and file ownership: **[`W41/README.md`](./W41/README.md)**.
+
+| Feature | Track | Specs | Depends on |
+| --- | --- | --- | --- |
+| Feature 1 — Board Member Showcase *(carried)* | A | [W38.3.1](./W38/W38.3.1.md) → [W38.3.2](./W38/W38.3.2.md) → [W38.3.3](./W38/W38.3.3.md) | W41.0 |
+| Feature 2 — Brand & Build Hygiene | B | [W41.2.1](./W41/W41.2.1.md) → [W41.2.2](./W41/W41.2.2.md) → [W41.2.3](./W41/W41.2.3.md) | W41.2.3 waits on W41.3.1 |
+| Feature 3 — Events Foundation *(new)* | C | [W41.3.1](./W41/W41.3.1.md) → [W41.3.2](./W41/W41.3.2.md) → [W41.3.3](./W41/W41.3.3.md) | W41.0 |
+| Feature 4 — Gallery & Contact | D | [W38.6](./W38/W38.6.md), [W38.4.2](./W38/W38.4.2.md) → [W41.4.1](./W41/W41.4.1.md) | — |
+
+Carried W38 specs keep their IDs and branch names, and end with a **W41
+addendum** — read it first.
+
+---
+
+## Week 38 — closed
+
+W38 ended with 6 of 12 specs merged to `main`, 1 (W38.2.2) merged into the
+wrong branch (re-PR to `main` in W41.0), and 5 carried into W41. Assessment in [`W41/README.md`](./W41/README.md).
+
+### Week 38 plan (as written)
+
+Three features were planned. Roughly 12 hours of work across 6 developers.
 
 ### Feature 1 — Brand Identity System
 

@@ -1,0 +1,59 @@
+# Builds the Vite app and publishes dist/ to GitHub Pages.
+# Live at https://campuscoderscrew.github.io/tsa-website/
+#
+# One-time setup (already done): Settings -> Pages -> Source = "GitHub Actions".
+# The /tsa-website/ base path comes from vite.config.ts (override with VITE_BASE).
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time; a newer push cancels a queued one but never an
+# in-progress publish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # --ignore-scripts skips ffmpeg-static's ~70MB binary download. It is only
+      # used by `npm run extract-posters`, never by the build.
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      # tsc -b && vite build && copy index.html -> 404.html (SPA deep links)
+      - name: Build
+        run: npm run build
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

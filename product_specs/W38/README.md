@@ -3,7 +3,7 @@
 **Week of:** 2026-09-14
 **Scope:** Static front end only — Vite + React + Tailwind v4, deployed to GitHub Pages under `/tsa-website/`. No backend.
 **Created:** 2026-09-21
-**Updated:** 2026-09-21
+**Updated:** 2026-10-05 — statuses reconciled with git; see [W41 README](../W41/README.md) for the full W38 assessment
 
 ---
 
@@ -78,18 +78,18 @@ real tokens instead of hex.
 
 | Spec | Title | Track | Status | Assigned | FE | BE | DevOps | Depends on |
 | --- | --- | :-: | --- | --- | :-: | :-: | :-: | --- |
-| [W38.1.1](./W38.1.1.md) | Define the TSA color token set | A | TODO | TBD | 3 | 1 | 1 | — |
-| [W38.1.2](./W38.1.2.md) | Migrate hardcoded hex colors to tokens | A | TODO | TBD | 2 | 1 | 2 | W38.1.1 |
-| [W38.1.3](./W38.1.3.md) | Add a display typeface and type scale | A | TODO | TBD | 3 | 1 | 1 | W38.1.1 |
-| [W38.2.1](./W38.2.1.md) | Build the Thai ornament component kit | B | TODO | TBD | 3 | 1 | 1 | — (soft: W38.1.1) |
-| [W38.2.2](./W38.2.2.md) | Apply ornaments to section headers | B | TODO | TBD | 3 | 1 | 1 | W38.2.1 |
-| [W38.3.1](./W38.3.1.md) | Create the board member data model | C | TODO | TBD | 2 | 2 | 2 | — |
-| [W38.3.2](./W38.3.2.md) | Redesign the board card with name and role | C | TODO | TBD | 3 | 1 | 1 | W38.3.1 |
-| [W38.3.3](./W38.3.3.md) | Add the board member detail overlay | C | TODO | TBD | 4 | 1 | 1 | W38.3.2 |
-| [W38.4.1](./W38.4.1.md) | Rethemed gallery page | D | TODO | TBD | 2 | 1 | 1 | — (soft: W38.1.1) |
-| [W38.4.2](./W38.4.2.md) | Gallery captions, alt text, and grouping | D | TODO | TBD | 3 | 2 | 1 | W38.4.1 |
-| [W38.5](./W38.5.md) | Transparent logo, favicon set, and social preview | E | TODO | TBD | 2 | 1 | 3 | — |
-| [W38.6](./W38.6.md) | Real contact details and social links | F | TODO | TBD | 1 | 1 | 1 | — |
+| [W38.1.1](./W38.1.1.md) | Define the TSA color token set | A | Completed (#6) | Luis C. | 3 | 1 | 1 | — |
+| [W38.1.2](./W38.1.2.md) | Migrate hardcoded hex colors to tokens | A | Completed (#9) | Luis C. | 2 | 1 | 2 | W38.1.1 |
+| [W38.1.3](./W38.1.3.md) | Add a display typeface and type scale | A | Completed (#10) | Luis C. | 3 | 1 | 1 | W38.1.1 |
+| [W38.2.1](./W38.2.1.md) | Build the Thai ornament component kit | B | Completed (#4) | hambalon | 3 | 1 | 1 | — (soft: W38.1.1) |
+| [W38.2.2](./W38.2.2.md) | Apply ornaments to section headers | B | PR #7 merged into the wrong branch — re-PR to `main` in W41.0 | hambalon | 3 | 1 | 1 | W38.2.1 |
+| [W38.3.1](./W38.3.1.md) | Create the board member data model | C | Carried to W41 | — | 2 | 2 | 2 | — |
+| [W38.3.2](./W38.3.2.md) | Redesign the board card with name and role | C | Carried to W41 | — | 3 | 1 | 1 | W38.3.1 |
+| [W38.3.3](./W38.3.3.md) | Add the board member detail overlay | C | Carried to W41 | — | 4 | 1 | 1 | W38.3.2 |
+| [W38.4.1](./W38.4.1.md) | Rethemed gallery page | D | Completed (#3) | Hgupta1912 | 2 | 1 | 1 | — (soft: W38.1.1) |
+| [W38.4.2](./W38.4.2.md) | Gallery captions, alt text, and grouping | D | Carried to W41 | — | 3 | 2 | 1 | W38.4.1 |
+| [W38.5](./W38.5.md) | Transparent logo, favicon set, and social preview | E | Completed (#8) | alanw10 | 2 | 1 | 3 | — |
+| [W38.6](./W38.6.md) | Real contact details and social links | F | Carried to W41 | — | 1 | 1 | 1 | — |
 
 **Total:** 12 specs ≈ 12 developer-hours.
 
