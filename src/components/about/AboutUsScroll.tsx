@@ -1,6 +1,7 @@
 import { useLayoutEffect, useMemo, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { LaiThaiDivider } from "@/components/ui/thai-ornament";
 
 const base = import.meta.env.BASE_URL;
 
@@ -136,7 +137,9 @@ export default function AboutUsScroll() {
           <div className="inline-flex w-fit items-center rounded-full border border-zinc-300 bg-background px-3 py-1 text-xs font-semibold tracking-wide text-zinc-700">
             Our Services
           </div>
-          <h2 className="mt-4 text-balance text-3xl font-semibold tracking-tight text-zinc-900 sm:text-4xl lg:text-5xl">
+          {/* Crimson, not gold: a gold hairline vanishes on sand. */}
+          <LaiThaiDivider height={18} className="mt-3 block w-full max-w-sm text-[#9B1B30] sm:max-w-lg" />
+          <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight text-zinc-900 sm:text-4xl lg:text-5xl">
             Built for culture, community, and impact.
           </h2>
           <p className="mt-3 max-w-2xl text-pretty text-sm leading-6 text-zinc-600 sm:text-base sm:leading-7">

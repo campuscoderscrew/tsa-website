@@ -9,6 +9,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { LaiThaiDivider } from "@/components/ui/thai-ornament";
 
 type EventMedia =
   | { type: "image"; src: string; alt?: string }
@@ -218,7 +219,8 @@ export default function UpcomingEvents() {
             <div className="inline-flex items-center rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs font-semibold tracking-wide text-white/80">
               Events
             </div>
-            <h2 className="mt-4 font-manrope text-4xl font-extrabold uppercase tracking-tighter text-white sm:text-5xl">
+            <LaiThaiDivider height={18} className="mx-auto mt-3 block w-full max-w-sm text-[#E8C547] sm:max-w-lg" />
+            <h2 className="mt-3 font-manrope text-4xl font-extrabold uppercase tracking-tighter text-white sm:text-5xl">
               Upcoming Events
             </h2>
           </header>
