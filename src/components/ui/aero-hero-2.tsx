@@ -8,7 +8,7 @@ const HERO_IMAGE = `${import.meta.env.BASE_URL}thai.jpeg`;
 const LOGO = `${import.meta.env.BASE_URL}logo.png`;
 
 /** Thai flag–inspired accents: gold ring on avatars */
-const THAI_GOLD = "#E8C547";
+const THAI_GOLD = "bg-tsa-gold-500";
 
 const AVATAR_IMAGES = [
   "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=128&h=128&q=80",
@@ -36,14 +36,14 @@ export default function AeroHero2() {
         />
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl px-6 pb-20 text-center text-[#FFFFF0] md:px-0">
+      <div className="relative z-10 w-full max-w-7xl px-6 pb-20 text-center text-tsa-cream-100 md:px-0">
         <div className="flex flex-col items-stretch justify-between gap-10 text-left lg:flex-row lg:items-end">
           <div className="max-w-3xl space-y-6">
-            <h1 className="text-5xl tracking-tight text-[#FFFFF0] md:text-7xl">
+            <h1 className="text-5xl tracking-tight text-tsa-cream-100 md:text-7xl">
               Thai Student Association
             </h1>
 
-            <p className="max-w-2xl text-lg font-bold leading-relaxed text-[#FFFFF0]/95 md:text-xl">
+            <p className="max-w-2xl text-lg font-bold leading-relaxed text-tsa-cream-100/95 md:text-xl">
               Connecting Thai Students, Celebrating Culture, Building Community
             </p>
           </div>
@@ -59,13 +59,13 @@ export default function AeroHero2() {
                     }}
                   >
                     <AvatarImage src={src} alt="" />
-                    <AvatarFallback className="font-bold text-[#1C2B5A]">
+                    <AvatarFallback className="font-bold text-tsa-navy-500">
                       {i + 1}
                     </AvatarFallback>
                   </Avatar>
                 ))}
               </div>
-              <div className="flex flex-col text-sm font-bold text-[#FFFFF0]">
+              <div className="flex flex-col text-sm font-bold text-tsa-cream-100">
                 <span className="text-base sm:text-lg">Community</span>
                 <span className="opacity-90">Events &amp; culture</span>
               </div>
@@ -75,10 +75,10 @@ export default function AeroHero2() {
                 className="group not-disabled:inset-shadow-none mx-auto flex cursor-pointer items-center justify-center gap-0 rounded-full border-none bg-transparent px-0 py-3 text-sm font-normal shadow-none hover:bg-transparent sm:py-4 sm:text-base [:hover,[data-pressed]]:bg-transparent"
                 render={<a href="#about" aria-label="Learn more about TSA" />}
               >
-                <span className="rounded-full bg-white px-6 py-3 font-bold text-[#9B1B30] duration-500 ease-in-out group-hover:bg-[#7A1028] group-hover:text-[#FFFFF0] group-hover:transition-colors">
+                <span className="rounded-full bg-white px-6 py-3 font-bold text-tsa-red-600 duration-500 ease-in-out group-hover:bg-tsa-red-700 group-hover:text-tsa-cream-100 group-hover:transition-colors">
                   Learn More
                 </span>
-                <div className="relative flex h-fit cursor-pointer items-center overflow-hidden rounded-full bg-white p-3 font-bold text-[#9B1B30] duration-500 ease-in-out group-hover:bg-[#7A1028] group-hover:text-[#FFFFF0] group-hover:transition-colors sm:p-4">
+                <div className="relative flex h-fit cursor-pointer items-center overflow-hidden rounded-full bg-white p-3 font-bold text-tsa-red-600 duration-500 ease-in-out group-hover:bg-tsa-red-700 group-hover:text-tsa-cream-100 group-hover:transition-colors sm:p-4">
                   <ArrowUpRight className="absolute h-4 w-4 -translate-x-1/2 transition-all duration-500 ease-in-out group-hover:translate-x-10 sm:h-5 sm:w-5" />
                   <ArrowUpRight className="absolute h-4 w-4 -translate-x-10 transition-all duration-500 ease-in-out group-hover:-translate-x-1/2 sm:h-5 sm:w-5" />
                 </div>
