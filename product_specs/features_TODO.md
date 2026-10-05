@@ -1,7 +1,8 @@
 # Features TODO — no specs written yet
 
 Everything identified as needed for the TSA website that is **not** being worked
-on in Week 38. Nothing here has a spec. Before a feature moves into a week, a
+on in the current week (W41). Items marked **→ W41.x.y** have been specced and
+are listed only so the history is clear. Before a feature moves into a week, a
 lead breaks it into ~1-hour specs in a `W__/` folder and links them from
 [`README.md`](./README.md).
 
@@ -34,6 +35,11 @@ certainly right, and it's an architecture decision, not a styling one.
 Rough shape: month grid or agenda list, past vs upcoming, links to the Instagram
 post for each event.
 
+**Progress:** W41.3.2 creates `src/data/events.ts` with ISO dates and
+upcoming/past helpers, shaped to map onto the Google Calendar API. The calendar
+*view* (a `/events` route) is the next spec once the club answers open
+question 1.
+
 ### Archive of previous board members
 
 > *Requested: "Archive of Previous Board Members & Events"*
@@ -60,7 +66,7 @@ vs Google Drive vs Instagram embeds), album routes, pagination or infinite
 scroll, and image optimization — a hundred full-resolution phone photos will
 destroy load time and blow past GitHub's repo size guidance.
 
-### Lightbox / full-screen photo viewer
+### Lightbox / full-screen photo viewer → W41.4.1
 
 Natural companion to the gallery. Click a photo, see it large, arrow between
 photos, Esc to close. Must be keyboard-navigable and must trap focus correctly —
@@ -126,15 +132,16 @@ W38.3.2 and W38.4.2 fix alt text in two sections. A full pass is still needed:
 - Color contrast across every brand color combination (do this *after* W38.1.1 lands)
 - Focus-visible styling on all interactive elements
 - The `StaggeredMenu` slide-out: focus trap, Esc to close, `aria-expanded`
-- The draggable events carousel — currently drag-only, with **no keyboard alternative at all**
+- ~~The draggable events carousel — currently drag-only, with **no keyboard alternative at all**~~ → W41.3.3
 - `prefers-reduced-motion` coverage across GSAP, Framer Motion, and the two CSS float animations in `index.css`
 
-The events carousel is the most serious item: a keyboard user cannot reach the
-second or third event by any means.
+The events carousel was the most serious item (W41.3.3). The board overlay
+(W38.3.3) and gallery lightbox (W41.4.1) carry their own keyboard criteria.
 
 ### Performance
 
-- Three MP4s in `public/video/` ship uncompressed. Check sizes and transcode.
+- Three MP4s in `public/video/` total ~7 MB (1.5 / 2.8 / 2.7 MB). Check whether they need to be that size, and transcode.
+- ~~`logo.png` 428 KB, `favicon.svg` 340 KB~~ → W41.2.2
 - Board photos and gallery images are unoptimized JPEGs. No responsive `srcset` anywhere.
 - No modern image formats (WebP/AVIF).
 - GSAP, Framer Motion **and** `motion` are all dependencies. `framer-motion` and `motion` are the same library under two names — consolidating could cut a chunk of bundle.
@@ -143,9 +150,10 @@ second or third event by any means.
 
 ### SEO and metadata
 
-W38.5 adds Open Graph tags. Still missing: `robots.txt`, `sitemap.xml`, structured
+W38.5 added Open Graph tags; W41.2.2 completes the Twitter tags, canonical URL
+and `theme-color`. Still missing: `robots.txt`, `sitemap.xml`, structured
 data (`Organization` / `Event` schema — valuable for a club that runs public
-events), and a canonical URL.
+events, and W41.3.2's event data makes `Event` schema straightforward).
 
 ### Dark mode — decide yes or no
 
@@ -202,6 +210,19 @@ Overlaps with the board archive.
 Depends on whether the club wants to maintain one.
 
 ### Repo housekeeping
+
+**Partly → W41.2.2** (dead assets) and **W41.2.3** (lint + CI). Remaining:
+
+- `ffmpeg-static` is a devDependency whose install script downloads a ~70 MB
+  binary from GitHub. It's only used by `npm run extract-posters`. CI installs
+  with `--ignore-scripts` to skip it; consider making it an on-demand
+  `npx` call instead so a plain `npm ci` stays fast everywhere.
+- Prettier, a test runner, and Lighthouse CI are all absent. Worth a spec once
+  W41.2.3's PR check exists to hang them on.
+- Gallery deep links (`/gallery?photo=4`) — deliberately out of scope in W41.4.1.
+
+Original items (W38):
+
 
 - `public/lotus_flower.png` is committed but imported nowhere. Either use it (Track B's ornament work may supersede it) or delete it.
 - `src/assets/react.svg` and `public/vite.svg` are template leftovers.
