@@ -41,23 +41,95 @@
   --color-success-foreground: var(--success-foreground);
   --color-warning: var(--warning);
   --color-warning-foreground: var(--warning-foreground);
+
+  --color-tsa-navy-900: var(--tsa-navy-900);
+  --color-tsa-navy-700: var(--tsa-navy-700);
+  --color-tsa-navy-500: var(--tsa-navy-500);
+  --color-tsa-red-700: var(--tsa-red-700);
+  --color-tsa-red-600: var(--tsa-red-600);
+  --color-tsa-red-500: var(--tsa-red-500);
+  --color-tsa-gold-500: var(--tsa-gold-500);
+  --color-tsa-gold-300: var(--tsa-gold-300);
+  --color-tsa-green-700: var(--tsa-green-700);
+  --color-tsa-cream-100: var(--tsa-cream-100);
+  --color-tsa-sand-100: var(--tsa-sand-100);
+
+  --color-surface-navy: var(--surface-navy);
+  --color-surface-navy-fg: var(--surface-navy-fg);
+  --color-surface-cream: var(--surface-cream);
+  --color-surface-cream-fg: var(--surface-cream-fg);
+  --color-surface-red: var(--surface-red);
+  --color-surface-red-fg: var(--surface-red-fg);
 }
+
+/**
+ * TSA Brand Color Palette
+ * ------------------------
+ * Defined in :root as --tsa-<family>-<weight>. Source of truth for all
+ * brand color — components should reference semantic tokens (--primary,
+ * --surface-navy, etc.) or these raw --tsa-* values directly, never
+ * hardcode hex.
+ *
+ * Families:
+ *   Navy   - Primary dark surface / ink. Use for section backgrounds
+ *            (Events, Footer) and body text on light backgrounds.
+ *            Do not use navy-900 as a text color on navy-700 — too low
+ *            contrast; navy-900 is reserved for the deepest backgrounds.
+ *   Red    - Primary brand accent / CTA color. red-600 is the de-facto
+ *            crimson used across buttons and cards; red-500 is the
+ *            official Thai flag red, reserved for contexts referencing
+ *            the flag directly (e.g. name tags). Do not use red as a
+ *            full-section background fill outside of the existing About
+ *            card pattern - it's loud at that scale.
+ *   Gold   - Accent only. Use sparingly for highlights, borders, small
+ *            UI details. Do not use gold-500 as a background fill for
+ *            an entire section — it overwhelms at that size.
+ *   Green  - Deep green, part of the brand brief but not yet consumed
+ *            anywhere in the UI. Reserved for future use.
+ *   Cream  - Text on dark surfaces (navy/red backgrounds).
+ *   Sand   - Tage background only.
+ *
+ * Known inconsistency: #ED1C24 (a bright fire-engine red) appears
+ * hardcoded in HomePage.tsx and BoardMembersSection.tsx. It is NOT 
+ * a deliberate accent — it's brand drift. Maps to --tsa-red-500. 
+ * W38.1.2 will replace these hardcoded instances with the token.
+ */
 
 :root {
   --radius: 0.625rem;
-  --background: #f0ebe6;
-  --foreground: oklch(0.145 0 0);
+
+  --tsa-navy-900: #1B1638;  /* Darkest navy */
+  --tsa-navy-700: #241D4F;  /* Primary navy */
+  --tsa-navy-500: #2D2A4A;  /* Official Thai flag blue */
+  --tsa-red-700:  #7A1028;  /* Pressed */
+  --tsa-red-600:  #9B1B30;  /* Primary crimson */
+  --tsa-red-500:  #A51931;  /* Official Thai flag red */
+  --tsa-gold-500: #E8C547;  /* Accent */
+  --tsa-gold-300: #F3DE97;  /* Washes / Borders */
+  --tsa-green-700:#1F5D4C;  /* Deep green */
+  --tsa-cream-100:#FFFFF0;  /* Text for dark backgrounds */
+  --tsa-sand-100: #F0EBE6;  /* Page background */
+
+  --surface-navy: var(--tsa-navy-700);
+  --surface-navy-fg: var(--tsa-cream-100);
+  --surface-cream: var(--tsa-sand-100);
+  --surface-cream-fg: var(--tsa-navy-900);
+  --surface-red: var(--tsa-red-600);
+  --surface-red-fg: var(--tsa-cream-100);
+
+  --background: var(--tsa-sand-100);
+  --foreground: #0e0a26;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
+  --primary: var(--tsa-red-600);
+  --primary-foreground: var(--tsa-cream-100);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
+  --accent: var(--tsa-gold-500);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
@@ -73,6 +145,11 @@
   --warning-foreground: var(--color-amber-700);
 }
 
+/**
+*  ATTENTION: The .dark block is currently unused.
+*  Currently awaiting decision with what will be
+*  done with it.
+*/
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
