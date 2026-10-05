@@ -41,7 +41,7 @@ export default function HomePage() {
         changeMenuColorOnOpen
         colors={["#ED1C24", "#FFFFFF", "#241D4F"]}
         accentColor="#E8C547"
-        logoUrl={`${base}logo.jpg`}
+        logoUrl={`${base}logo.png`}
         className="font-manrope"
       />
 

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 /** Local asset from `/public/thai.jpeg` (served at site root) */
 const HERO_IMAGE = `${import.meta.env.BASE_URL}thai.jpeg`;
-const LOGO = `${import.meta.env.BASE_URL}logo.jpg`;
+const LOGO = `${import.meta.env.BASE_URL}logo.png`;
 
 /** Thai flag–inspired accents: gold ring on avatars */
 const THAI_GOLD = "#E8C547";
