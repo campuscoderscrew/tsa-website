@@ -44,7 +44,7 @@ export default function HomePage() {
         colors={[TSA_COLORS.red500, "#FFFFFF", TSA_COLORS.navy700]}
         accentColor={TSA_COLORS.gold500}
         logoUrl={`${base}logo.jpg`}
-        className="font-manrope"
+        className="font-body"
       />
 
       <AeroHero2 />

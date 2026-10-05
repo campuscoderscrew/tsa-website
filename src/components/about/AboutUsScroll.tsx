@@ -128,7 +128,7 @@ export default function AboutUsScroll() {
   return (
     <section
       ref={rootRef}
-      className="relative w-full bg-background font-manrope"
+      className="relative w-full bg-background font-body"
       aria-label="Our Services"
     >
       <div className="mx-auto w-full max-w-6xl px-6 py-16 md:px-10">
