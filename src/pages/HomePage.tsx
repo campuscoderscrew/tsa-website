@@ -9,6 +9,8 @@ import UpcomingEvents from "@/components/events/UpcomingEvents";
 import Footer from "@/components/footer/Footer";
 import AeroHero2 from "@/components/ui/aero-hero-2";
 
+import { TSA_COLORS } from "@/lib/brandColors"; // .ts file for StaggeredMenu
+
 const base = import.meta.env.BASE_URL;
 
 const menuItems: StaggeredMenuItem[] = [
@@ -39,9 +41,9 @@ export default function HomePage() {
         menuButtonColor="#ffffff"
         openMenuButtonColor="#ffffff"
         changeMenuColorOnOpen
-        colors={["#ED1C24", "#FFFFFF", "#241D4F"]}
-        accentColor="#E8C547"
-        logoUrl={`${base}logo.png`}
+        colors={[TSA_COLORS.red500, "#FFFFFF", TSA_COLORS.navy700]}
+        accentColor={TSA_COLORS.gold500}
+        logoUrl={`${base}logo.jpg`}
         className="font-manrope"
       />
 

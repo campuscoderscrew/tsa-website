@@ -46,7 +46,7 @@ export interface StaggeredMenuProps {
 
 function StaggeredMenu({
   position = "right",
-  colors = ["#B497CF", "#5227FF"],
+  colors = ["bg-tsa-red-600", "bg-tsa-gold-500"],
   items = [],
   socialItems = [],
   displaySocials = true,
@@ -56,7 +56,7 @@ function StaggeredMenu({
   displayLogo = true,
   menuButtonColor = "#fff",
   openMenuButtonColor = "#fff",
-  accentColor = "#5227FF",
+  accentColor = "bg-tsa-gold-500",
   changeMenuColorOnOpen = true,
   isFixed = false,
   closeOnClickAway = true,

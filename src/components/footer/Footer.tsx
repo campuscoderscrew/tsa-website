@@ -17,7 +17,7 @@ export default function Footer() {
       aria-label="Site footer"
       className="w-full bg-background min-h-dvh p-4 pb-[calc(1rem+env(safe-area-inset-bottom))] sm:p-6 md:p-8"
     >
-      <div className="relative min-h-[calc(100dvh-2rem)] w-full overflow-visible rounded-[26px] bg-[#241D4F] px-6 pb-[calc(2.5rem+env(safe-area-inset-bottom))] pt-6 text-white ring-1 ring-black/10 sm:min-h-[calc(100dvh-3rem)] sm:px-10 sm:pt-8 md:min-h-[calc(100dvh-4rem)]">
+      <div className="relative min-h-[calc(100dvh-2rem)] w-full overflow-visible rounded-[26px] bg-tsa-navy-700 px-6 pb-[calc(2.5rem+env(safe-area-inset-bottom))] pt-6 text-white ring-1 ring-black/10 sm:min-h-[calc(100dvh-3rem)] sm:px-10 sm:pt-8 md:min-h-[calc(100dvh-4rem)]">
           {/* top row */}
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3">
