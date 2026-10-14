@@ -8,6 +8,8 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 type EventMedia =
@@ -366,6 +368,14 @@ export default function UpcomingEvents() {
               </motion.p>
             </AnimatePresence>
           </div>
+
+          <Link
+            to="/events"
+            className="relative z-[80] mt-8 inline-flex items-center gap-1.5 rounded-full border border-white/25 px-5 py-2.5 text-sm font-semibold text-tsa-cream-100 transition-colors hover:bg-white/10 outline-none focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-offset-2 focus-visible:outline-tsa-gold-500"
+          >
+            See all events
+            <ArrowRight aria-hidden="true" className="size-4" />
+          </Link>
         </div>
       </div>
     </section>

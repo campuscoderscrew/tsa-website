@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 
 import { GalleryTransitionProvider } from "@/components/transitions/GalleryTransitionProvider";
+import EventsPage from "@/pages/EventsPage";
 import GalleryPage from "@/pages/GalleryPage";
 import HomePage from "@/pages/HomePage";
 
@@ -10,6 +11,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/gallery" element={<GalleryPage />} />
+        <Route path="/events" element={<EventsPage />} />
       </Routes>
     </GalleryTransitionProvider>
   );
