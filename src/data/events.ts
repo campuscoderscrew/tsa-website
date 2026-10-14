@@ -246,3 +246,124 @@ export function groupEventsByMonth(
     events: groups[key],
   }));
 }
+
+/* ---------------------------------------------------------------------- */
+/* Categories                                                              */
+/* ---------------------------------------------------------------------- */
+
+export const EVENT_CATEGORIES = Object.keys(
+  EVENT_CATEGORY_LABELS,
+) as TsaEventCategory[];
+
+/** A category from a URL or form value, or null if it isn't one we know. */
+export function parseEventCategory(
+  value: string | null | undefined,
+): TsaEventCategory | null {
+  return EVENT_CATEGORIES.find((c) => c === value) ?? null;
+}
+
+/** Events in `category`, keeping their order. `null` means all categories. */
+export function filterEventsByCategory(
+  events: TsaEvent[],
+  category: TsaEventCategory | null,
+): TsaEvent[] {
+  return category ? events.filter((e) => e.category === category) : events;
+}
+
+/* ---------------------------------------------------------------------- */
+/* School years and semesters                                              */
+/* ---------------------------------------------------------------------- */
+
+/*
+ * Month rule (by the month an event starts, in Eastern time):
+ *
+ *   Aug–Dec  → Fall   <year>, school year <year>-<year+1>
+ *   Jan–May  → Spring <year>, school year <year-1>-<year>
+ *   Jun–Jul  → Summer <year>, school year <year-1>-<year>
+ *
+ * UMD's fall runs late August to mid December and spring late January to mid
+ * May. Winter session (January) counts as spring, since it's the same board
+ * between the same fall and spring. Summer events belong to the school year
+ * that just ended: the board elected for it is still in office until fall.
+ *
+ * School years use the same "2025-2026" format (hyphen) as `term` on board
+ * members (W38.3.1), so events and boards can be matched up later.
+ */
+
+export type Semester = "Fall" | "Spring" | "Summer";
+
+/** Year and month (1–12) an event starts in, without `new Date()` pitfalls. */
+function startYearMonth(event: TsaEvent): { year: number; month: number } {
+  const [year, month] = eventDayKey(event.start).split("-").map(Number);
+  return { year, month };
+}
+
+function semesterOf(month: number): Semester {
+  if (month >= 8) return "Fall";
+  if (month <= 5) return "Spring";
+  return "Summer";
+}
+
+/** "2025-2026" */
+export function getEventSchoolYear(event: TsaEvent): string {
+  const { year, month } = startYearMonth(event);
+  const fallYear = semesterOf(month) === "Fall" ? year : year - 1;
+  return `${fallYear}-${fallYear + 1}`;
+}
+
+/** "Fall 2025", "Spring 2026", "Summer 2026" */
+export function getEventSemester(event: TsaEvent): string {
+  const { year, month } = startYearMonth(event);
+  return `${semesterOf(month)} ${year}`;
+}
+
+export type EventSemesterGroup = {
+  /** "Spring 2026" */
+  label: string;
+  events: TsaEvent[];
+};
+
+export type EventSchoolYearGroup = {
+  /** "2025-2026" */
+  schoolYear: string;
+  semesters: EventSemesterGroup[];
+};
+
+// Order of semesters within a school year, earliest first.
+const SEMESTER_ORDER: Record<Semester, number> = {
+  Fall: 0,
+  Spring: 1,
+  Summer: 2,
+};
+
+/**
+ * Group past events by school year, most recent year first, then by
+ * semester, most recent first. Pass the result of `getPastEvents()` so
+ * "past" is decided in the visitor's browser at page load. Events keep the
+ * order they're given (most recent first) inside each semester.
+ */
+export function groupEventsBySchoolYear(
+  events: TsaEvent[],
+): EventSchoolYearGroup[] {
+  const years = new Map<string, Map<string, TsaEvent[]>>();
+  for (const event of events) {
+    const schoolYear = getEventSchoolYear(event);
+    const semester = getEventSemester(event);
+    const semesters = years.get(schoolYear) ?? new Map<string, TsaEvent[]>();
+    years.set(schoolYear, semesters);
+    semesters.set(semester, [...(semesters.get(semester) ?? []), event]);
+  }
+
+  const semesterRank = (label: string) =>
+    SEMESTER_ORDER[label.split(" ")[0] as Semester];
+
+  return [...years.keys()]
+    .sort()
+    .reverse()
+    .map((schoolYear) => ({
+      schoolYear,
+      semesters: [...years.get(schoolYear)!.entries()]
+        .sort(([a], [b]) => semesterRank(b) - semesterRank(a))
+        .map(([label, semesterEvents]) => ({ label, events: semesterEvents })),
+    }));
+}
