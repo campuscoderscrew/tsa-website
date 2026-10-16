@@ -1,21 +1,69 @@
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Play } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useGalleryTransition } from "@/components/transitions/GalleryTransitionProvider";
+import { GALLERY, groupByEvent, type GalleryImage } from "@/data/gallery";
 
 const base = import.meta.env.BASE_URL;
 
-const IMAGES = [
-  `${base}thai.jpeg`,
-  `${base}thai_2.jpeg`,
-  `${base}events.jpg`,
-  `${base}community.jpg`,
-  `${base}leadership.jpg`,
-  `${base}support.jpg`,
-  `${base}video/water_festival_poster.jpg`,
-  `${base}video/krathong_poster.jpg`,
-  `${base}video/trivia_poster.jpg`,
-] as const;
+const GROUPS = groupByEvent(GALLERY);
+// One masonry for now: most events have a single photo, so per-event headings
+// would leave mostly-empty rows. To switch, map GROUPS to <section>s, each with
+// an <h2> and its own columns container around `group.images`.
+const TILES = GROUPS.flatMap((group) => group.images);
+
+const EVENT_COUNT = GROUPS.filter((group) => group.event !== null).length;
+const VIDEO_COUNT = GALLERY.filter((image) => image.video).length;
+const PHOTO_COUNT = GALLERY.length - VIDEO_COUNT;
+
+function plural(n: number, word: string) {
+  return `${n} ${word}${n === 1 ? "" : "s"}`;
+}
+
+const SUMMARY = [
+  plural(PHOTO_COUNT, "photo"),
+  VIDEO_COUNT > 0 ? ` and ${plural(VIDEO_COUNT, "video still")}` : "",
+  EVENT_COUNT > 0 ? ` from ${plural(EVENT_COUNT, "event")}` : "",
+].join("");
+
+const dateFormat = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "UTC",
+});
+
+function GalleryTile({ image }: { image: GalleryImage }) {
+  const when = image.date ? dateFormat.format(new Date(image.date)) : image.term;
+  const detail = [image.caption, when].filter(Boolean).join(" · ");
+
+  return (
+    <figure className="relative break-inside-avoid overflow-hidden rounded-xl bg-white/5 ring-1 ring-white/15 sm:rounded-2xl">
+      <img
+        src={`${base}${image.src}`}
+        alt={image.alt}
+        width={image.width}
+        height={image.height}
+        className="h-auto w-full object-cover"
+        draggable={false}
+        loading="lazy"
+        decoding="async"
+      />
+      {image.video && (
+        <span className="absolute right-2 top-2 inline-flex items-center gap-1 rounded-full bg-tsa-navy-900/80 px-2.5 py-1 text-xs font-medium text-white backdrop-blur-sm sm:right-3 sm:top-3">
+          <Play className="h-3 w-3 fill-current" aria-hidden="true" />
+          Video
+        </span>
+      )}
+      <figcaption className="px-4 py-3 sm:px-5 sm:py-4">
+        <p className="text-sm font-semibold text-white sm:text-base">
+          {image.event ?? "More moments"}
+        </p>
+        {detail && <p className="mt-0.5 text-sm text-white/70">{detail}</p>}
+      </figcaption>
+    </figure>
+  );
+}
 
 export default function GalleryPage() {
   const { transitionTo } = useGalleryTransition();
@@ -55,22 +103,12 @@ export default function GalleryPage() {
               <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
                 Moments from our community
               </h1>
+              <p className="mt-4 text-base text-white/70 sm:text-lg">{SUMMARY}</p>
             </div>
 
           <div className="columns-1 gap-3 space-y-3 sm:columns-2 sm:gap-5 sm:space-y-5 lg:columns-3">
-            {IMAGES.map((src) => (
-              <div
-                key={src}
-                className="break-inside-avoid overflow-hidden rounded-xl bg-white/5 ring-1 ring-white/15 sm:rounded-2xl"
-              >
-                <img
-                  src={src}
-                  alt=""
-                  className="h-auto w-full object-cover"
-                  draggable={false}
-                  loading="lazy"
-                />
-              </div>
+            {TILES.map((image) => (
+              <GalleryTile key={image.src} image={image} />
             ))}
           </div>
         </div>
