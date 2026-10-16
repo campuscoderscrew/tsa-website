@@ -16,7 +16,7 @@ const base = import.meta.env.BASE_URL;
 const menuItems: StaggeredMenuItem[] = [
   { label: "Home", ariaLabel: "Go to top of page", link: "/" },
   { label: "About", ariaLabel: "Go to about section", link: "#about" },
-  { label: "Events", ariaLabel: "Go to events section", link: "#events" },
+  { label: "Events", ariaLabel: "View the events page", link: "/events" },
   { label: "Board", ariaLabel: "Go to board section", link: "#board" },
   { label: "Gallery", ariaLabel: "View the gallery page", link: "/gallery" },
   { label: "Contact", ariaLabel: "Go to contact section", link: "#contact" },
