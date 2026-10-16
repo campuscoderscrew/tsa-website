@@ -43,7 +43,7 @@ export default function HomePage() {
         changeMenuColorOnOpen
         colors={[TSA_COLORS.red500, "#FFFFFF", TSA_COLORS.navy700]}
         accentColor={TSA_COLORS.gold500}
-        logoUrl={`${base}logo.jpg`}
+        logoUrl={`${base}branding/logo.jpg`}
         className="font-body"
       />
 
