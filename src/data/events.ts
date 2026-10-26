@@ -248,6 +248,73 @@ export function groupEventsByMonth(
 }
 
 /* ---------------------------------------------------------------------- */
+/* Calendar months                                                         */
+/* ---------------------------------------------------------------------- */
+
+/*
+ * Month and day arithmetic for the month calendar (W42.1.3). Everything works
+ * on `YYYY-MM` / `YYYY-MM-DD` strings and `Date.UTC`, never local dates, so the
+ * grid can't shift a day whatever the visitor's zone.
+ */
+
+// 1900–2099 only: `Date.UTC` reads two-digit years as 19xx.
+const MONTH_KEY = /^(19|20)\d{2}-(0[1-9]|1[0-2])$/;
+
+/** A `YYYY-MM` month from a URL value, or null if it isn't a valid one. */
+export function parseMonthKey(value: string | null | undefined): string | null {
+  return value && MONTH_KEY.test(value) ? value : null;
+}
+
+/** The `YYYY-MM` month `delta` months after `month` (negative for before). */
+export function shiftMonthKey(month: string, delta: number): string {
+  const [year, m] = month.split("-").map(Number);
+  return new Date(Date.UTC(year, m - 1 + delta, 1)).toISOString().slice(0, 7);
+}
+
+/** The `YYYY-MM-DD` day `delta` days after `day`. */
+export function shiftDayKey(day: string, delta: number): string {
+  const [year, m, d] = day.split("-").map(Number);
+  return new Date(Date.UTC(year, m - 1, d + delta)).toISOString().slice(0, 10);
+}
+
+/** "November 2026" */
+export function formatMonthKey(month: string): string {
+  return formatEventDate(`${month}-01`, { month: "long", year: "numeric" });
+}
+
+/**
+ * Every `YYYY-MM-DD` day an event covers, first to last. A one-day event
+ * covers one day; `end` is inclusive.
+ */
+export function getEventDayKeys(event: TsaEvent): string[] {
+  const first = eventDayKey(event.start);
+  const last = event.end ? eventDayKey(event.end) : first;
+  const days = [first];
+  // The cap guards against an `end` typo turning into an endless loop.
+  while (days[days.length - 1] < last && days.length < 366) {
+    days.push(shiftDayKey(days[days.length - 1], 1));
+  }
+  return days;
+}
+
+/**
+ * Events that fall on at least one day of `month` (`YYYY-MM`), soonest
+ * first. A multi-day event that starts in October and ends in November is in
+ * both months.
+ */
+export function getEventsInMonth(
+  month: string,
+  events: TsaEvent[] = EVENTS,
+): TsaEvent[] {
+  return events
+    .filter(
+      (e) =>
+        eventMonthKey(e.start) <= month && eventMonthKey(e.end ?? e.start) >= month,
+    )
+    .sort(byStart);
+}
+
+/* ---------------------------------------------------------------------- */
 /* Categories                                                              */
 /* ---------------------------------------------------------------------- */
 
