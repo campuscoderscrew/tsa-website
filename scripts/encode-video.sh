@@ -17,11 +17,7 @@ if [ "$#" -ne 2 ]; then
 fi
 
 ffmpeg -y -i "$1" \
-  -vf "scale=-2:720,fps=30" \
-  -c:v libx264 \
-  -crf 30 \
-  -preset slow \
-  -pix_fmt yuv420p \
-  -an \
-  -movflags +faststart \
+  -vf "scale=-2:720" \
+  -c:v libx264 -crf 30 -preset slow \
+  -an -movflags +faststart \
   "$2"
